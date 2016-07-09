@@ -95,7 +95,7 @@ class SensorDistance(Sensor):
         event = Event(self.id, self.type, flag, int(time.time()))
 
         GPIO.cleanup()
-        return event.buildMessage()
+        return event
 
 if __name__ == '__main__':
     dict_example = {"ECHO": 24, "TRIG": 23, "LIMIT": 20}
