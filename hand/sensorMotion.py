@@ -12,11 +12,13 @@ class SensorMotion(sensor.Sensor) :
         self.type = type
         self.PINN = args["PINN"]
         self.last = 0
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.PINN, GPIO.IN)
+        #GPIO.setmode(GPIO.BCM)
+        #GPIO.setup(self.PINN, GPIO.IN)
 
     def detect(self) :
         evt = None
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.PINN, GPIO.IN)
         if GPIO.input(self.PINN) :
             now = time.time()
             if now - self.last > 5 :

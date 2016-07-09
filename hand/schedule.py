@@ -33,10 +33,11 @@ class Schedule :
             time.sleep(1)
             print "----------------------"
             for (id,sensor) in self.sensors.items() :
+                print "-----------"
                 try :
                     evt = sensor.detect()
                     if evt is not None :
-                        print id, sensor
+                        print id, sensor, evt
                         message = evt.buildMessage()
                         notice.Notice.notify(message)
                 except Exception,ex :
