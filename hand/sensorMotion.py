@@ -16,23 +16,20 @@ class SensorMotion(sensor.Sensor) :
         GPIO.setup(self.PINN, GPIO.IN)
 
     def detect(self) :
+        evt = None
         if GPIO.input(self.PINN) :
             now = time.time()
             if now - self.last > 5 :
-                print "True"
-                self.last = now
-                return True
-            else :
-                print "Wait"
-                self.last = new
-        else :
-            print "False"
-            return False
+                evt = event.Event(self.type, self.id, 1)
+            self.last = now
+        return evt
 
 
 if __name__ == "__main__" :
-    args = {"PINN" : 18}
-    sensor = SensorMotion(args)
-    sensor.detect()
+    args = {"PINN" : 17}
+    sensor = SensorMotion(1, 2, args)
+    while True :
+        time.sleep(1)
+        print sensor.detect()
 
 
