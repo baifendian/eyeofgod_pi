@@ -3,6 +3,7 @@
 
 
 import time
+import event
 import sensor
 import notice
 
@@ -11,7 +12,7 @@ class Schedule :
 
     def __init__(self) :
         self.sensors = {}
-        self.notifier = notice.Notice()
+        #self.notifier = notice.Notice()
 
 
     def register(self, id, sensor) :
@@ -33,10 +34,11 @@ class Schedule :
             print "----------------------"
             for (id,sensor) in self.sensors.items() :
                 try :
-                    event = sensor.detect()
-                    if event :
+                    evt = sensor.detect()
+                    if evt is not None :
                         print id, sensor
-                        self.notifier.notify(message)
+                        message = evt.buildMessage()
+                        notice.Notice.notify(message)
                 except Exception,ex :
                     print ex
                     pass
