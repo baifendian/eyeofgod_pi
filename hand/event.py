@@ -1,4 +1,4 @@
-class Event :
+class Event(object):
     def __init__(self, sensor_type,sensor_id, pi_mark, timestamp,state) :
         self.sensor_type  = sensor_type
         self.sensor_id    = sensor_id
@@ -7,7 +7,7 @@ class Event :
         self.state        = state
         self.mark         = pi_mark + '_' + sensor_id
 
-    def buildMessage(self)
+    def buildMessage(self):
         message = {}
         message['sensor_type'] = self.sensor_type
         message['sensor_id'] = self.sensor_id
