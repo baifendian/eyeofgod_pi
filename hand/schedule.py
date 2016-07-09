@@ -11,7 +11,7 @@ class Schedule :
 
     def __init__(self) :
         self.sensors = {}
-        #self.notifier = notice.Notice()
+        self.notifier = notice.Notice()
 
 
     def register(self, id, sensor) :
@@ -30,14 +30,12 @@ class Schedule :
     def start(self) :
         while True :
             time.sleep(1)
-            print "====="
             for (id,sensor) in self.sensors.items() :
                 try :
                     event = sensor.detect()
                     if event :
-                        pass
-                        # notify
-                        #self.notifier.notify(message)
+                        print id, sensor, "notify ..."
+                        self.notifier.notify(message)
                 except Exception,ex :
                     pass
 
