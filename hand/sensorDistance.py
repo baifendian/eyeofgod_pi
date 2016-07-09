@@ -27,7 +27,7 @@ ECHO = 24
 SPEED = 17150
 
 class Sensor(Sensor):
-    def __init__(self) :
+    def __init__(self):
         # Set board to BCM mode
         GPIO.setmode(GPIO.BCM)
         # Set pin as GPIO out
@@ -59,7 +59,6 @@ class Sensor(Sensor):
             return NULL
 
         print 'Distance: %s cm.' % (distance-0.5)
-
 
 
 if __name__ == '__main__':
