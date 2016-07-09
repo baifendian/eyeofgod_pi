@@ -40,6 +40,7 @@ class Schedule :
                         print id, sensor, evt
                         message = evt.buildMessage()
                         notice.Notice.notify(message)
+                        print message
                 except Exception,ex :
                     print ex
                     pass
