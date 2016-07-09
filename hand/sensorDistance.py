@@ -22,7 +22,7 @@ from sensor import Sensor
 # Speed
 SPEED = 17150
 
-class Sensor(Sensor):
+class SensorDistance(Sensor):
     def __init__(self, _id='none', _type='none', _args={}):
         '''
         Dict example
@@ -95,6 +95,6 @@ class Sensor(Sensor):
 
 if __name__ == '__main__':
     dict_example = {"ECHO": 24, "TRIG": 23, "LIMIT": 20}
-    sensor = Sensor('dist', '001', dict_example)
+    sensor = SensorDistance('dist', '001', dict_example)
     print sensor.detect()
 
