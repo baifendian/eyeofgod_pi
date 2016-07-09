@@ -13,6 +13,7 @@
 """
 
 import time
+import traceback
 import RPi.GPIO as GPIO
 
 from event import Event
@@ -62,6 +63,7 @@ class SensorDistance(Sensor):
         except Exception:
             self.GPIO.cleanup()
             print 'GPIO Exception'
+            print traceback.print_exc
             GPIO.cleanup()
             return None
         
