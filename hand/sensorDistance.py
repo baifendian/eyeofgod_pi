@@ -62,6 +62,7 @@ class Sensor(Sensor):
         except Exception:
             self.GPIO.cleanup()
             print 'GPIO Exception'
+            GPIO.cleanup()
             return None
         
         start_time = 0;
@@ -73,11 +74,13 @@ class Sensor(Sensor):
             end_time = time.time()
         if start_time == 0 or end_time == 0:
             print 'missassignment'
-            return
-        distance = round((end_time - start_time) * SPEED, 2)
+            GPIO.cleanup()
+            return None
 
+        distance = round((end_time - start_time) * SPEED, 2)
         if distance < 1 or distance > 4000:
             print 'Out Of Range, %s' % (distance)
+            GPIO.cleanup()
             return None
 
         print 'Distance: %s cm.' % (distance - 0.5)
@@ -87,6 +90,7 @@ class Sensor(Sensor):
 
         event = Event(self.id, self.type, flag, int(time.time()))
 
+        GPIO.cleanup()
         return event.buildMessage()
 
 if __name__ == '__main__':
