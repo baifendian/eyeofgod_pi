@@ -31,7 +31,7 @@ class Schedule :
         while True :
             time.sleep(1)
             print "====="
-            for sensor in self.sensors :
+            for (id,sensor) in self.sensors.items() :
                 try :
                     event = sensor.detect()
                     if event :

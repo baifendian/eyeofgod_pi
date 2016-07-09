@@ -2,10 +2,10 @@
 #coding:utf-8
 
 
-import schedule
-import sensor
-
 import config
+import schedule
+import sensorDistance
+import sensorMotion
 
 
 
@@ -15,15 +15,20 @@ def main() :
     # schedule
     scheduler = schedule.Schedule()
 
-    # config
-    for (k,v) in config.SENSOR_MAP.items() :
+    # load sensor
+    for (id,info) in config.SENSOR_MAP.items() :
+
+        mname   = info["module"]
+        cname   = info["clazz"]
+
+        module  = __import__(mname)
+        clazz   = getattr(module, cname)
 
         # new a sensor
-        #sensor = sensor()
+        sensor  = clazz()
 
         # register a sensor
-        #scheduler.register(sensor)
-        scheduler.register(k,v)
+        scheduler.register(id, sensor)
 
     # list
     scheduler.list()
@@ -34,7 +39,6 @@ def main() :
     scheduler.start()
 
     print "[Schedule] stop ..."
-
 
 
 

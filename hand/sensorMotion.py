@@ -4,13 +4,13 @@ import sensor
 
 
 
-class SensorDistance(sensor.Sensor) :
+class SensorMotion(sensor.Sensor) :
 
     def __init__(self) :
         pass
 
     def detect(self) :
-        print "distance"
+        print "motion"
         pass
 
 
