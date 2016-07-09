@@ -100,5 +100,6 @@ class SensorDistance(Sensor):
 if __name__ == '__main__':
     dict_example = {"ECHO": 24, "TRIG": 23, "LIMIT": 20}
     sensor = SensorDistance('dist', '001', dict_example)
-    print sensor.detect()
+    for _ in range(5):
+        print sensor.detect()
 
