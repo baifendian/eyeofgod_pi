@@ -27,7 +27,7 @@ ECHO = 24
 SPEED = 17150
 
 class Sensor(Sensor):
-    def __init__(self) :
+    def __init__(self, judge):
         # Set board to BCM mode
         GPIO.setmode(GPIO.BCM)
         # Set pin as GPIO out
@@ -36,6 +36,7 @@ class Sensor(Sensor):
         GPIO.setup(ECHO, GPIO.IN)
 
         self.GPIO = GPIO
+        self.judge = judge
 
     def detect(self):
         try:
@@ -50,6 +51,7 @@ class Sensor(Sensor):
             print 'Sensor is ready'
         except Exception:
             self.GPIO.cleanup()
+            return None
 
         while 0 == self.GPIO.input(ECHO):
             start_time = time.time()
