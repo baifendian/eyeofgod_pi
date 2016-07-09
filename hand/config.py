@@ -14,18 +14,8 @@ SENSOR_MAP = {
         "module": "sensorDistance",
         "clazz" : "SensorDistance", 
         "args"  : {
-            "ECHO" : 11, 
-            "TRIG" : 12,
-            "LIMIT" : 20
-        }
-    },
-    "adsfgh" : {
-        "type"  : 1, 
-        "module": "sensorDistance",
-        "clazz" : "SensorDistance", 
-        "args"  : {
-            "ECHO" : 11, 
-            "TRIG" : 12,
+            "ECHO" : 24, 
+            "TRIG" : 23,
             "LIMIT" : 20
         }
     },
@@ -34,7 +24,7 @@ SENSOR_MAP = {
         "module": "sensorMotion",
         "clazz" : "SensorMotion",
         "args"  : {
-            "PINN" : 15
+            "PINN" : 17
         }
     }
 }
