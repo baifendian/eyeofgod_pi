@@ -62,11 +62,11 @@ class Sensor(Sensor):
             print 'GPIO Exception'
             return None
 
-        while 0 == self.GPIO.input(self.trig):
+        while 0 == self.GPIO.input(self.echo):
             #print 'first input'
             start_time = time.time()
 
-        while 1 == self.GPIO.input(self.trig):
+        while 1 == self.GPIO.input(self.echo):
             #print 'second input'
             end_time = time.time()
 
