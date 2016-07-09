@@ -90,9 +90,9 @@ class SensorDistance(Sensor):
             return None
 
         logging.error('Distance: %s cm.' % (distance - 0.5))
-        flag = True
+        flag = 1
         if distance > self.args['LIMIT']:
-            flag = False
+            flag = 0
 
         event = Event(self.id, self.type, flag, int(time.time()))
 
