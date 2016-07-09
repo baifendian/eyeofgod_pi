@@ -1,10 +1,12 @@
 
 
-import config
+import piconfig
 import urllib
 import urllib2
-
-
+import logging
+from logging import config
+import LOGGING
+config.dictConfig(LOGGING.LOGGING)
 #message: { 'id':$id , 'distance':$distance }
 
 
@@ -18,11 +20,11 @@ class Notice :
     @staticmethod
     def notify(message):
         ms_encode = urllib.urlencode(message)
-        req = urllib2.Request(config.SERVER_URL, ms_encode)
+        req = urllib2.Request(piconfig.SERVER_URL, ms_encode)
         sock = urllib2.urlopen(req)
         html = sock.read()
         code = sock.getcode()
         sock.close()
-        print html
-        print code
+        logging.debug(html)
+        logging.debug(code)
         return code
