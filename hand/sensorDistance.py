@@ -53,14 +53,14 @@ class SensorDistance(Sensor):
             GPIO.setup(self.echo, GPIO.IN)
 
             self.GPIO.output(self.trig, False)
-            print 'Sensor will be starting...'
+            #print 'Sensor will be starting...'
             time.sleep(1)
 
             # Testing for sensor
             self.GPIO.output(self.trig, True)
             time.sleep(0.00001)
             self.GPIO.output(self.trig, False)
-            print 'Sensor is ready'
+            #print 'Sensor is ready'
         except Exception:
             self.GPIO.cleanup()
             print 'GPIO Exception'

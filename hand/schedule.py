@@ -30,6 +30,7 @@ class Schedule :
     def start(self) :
         while True :
             time.sleep(1)
+            print "----------------------"
             for (id,sensor) in self.sensors.items() :
                 try :
                     event = sensor.detect()
@@ -37,6 +38,7 @@ class Schedule :
                         print id, sensor
                         self.notifier.notify(message)
                 except Exception,ex :
+                    print ex
                     pass
 
 
