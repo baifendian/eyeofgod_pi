@@ -1,16 +1,24 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
+"""
+    <+ MODULE_NAME +>
+    Sensor Module
 
-import event
+    <+ DESCRIPTION +>
+    base class of all sensors
 
+    Licensed under the <+ LICENSE +> license, see <+ X +> for more details etc.
+    Copyright by EyeofGod
+"""
 
-class Sensor :
-
+class Sensor(object):
     def __init__(self) :
         pass
 
-
-    def detect() :
+    def detect(self):
         pass
-        return event
 
+if __name__ == '__main__':
+    pass
 
