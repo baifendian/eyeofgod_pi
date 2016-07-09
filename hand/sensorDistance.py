@@ -33,24 +33,25 @@ class SensorDistance(Sensor):
             "LIMIT" : 20
          }
         '''
-        # Set board to BCM mode
-        GPIO.setmode(GPIO.BCM)
 
         self.id = _id
         self.type = _type
         self.trig = int(_args['TRIG'])
         self.echo = int(_args['ECHO'])
 
-        # Set pin as GPIO out
-        GPIO.setup(self.trig, GPIO.OUT)
-        # Set pin as GPIO in
-        GPIO.setup(self.echo, GPIO.IN)
-
         self.GPIO = GPIO
         self.args = _args
 
     def detect(self):
         try:
+            # Set board to BCM mode
+            self.GPIO.setmode(GPIO.BCM)
+
+            # Set pin as GPIO out
+            GPIO.setup(self.trig, GPIO.OUT)
+            # Set pin as GPIO in
+            GPIO.setup(self.echo, GPIO.IN)
+
             self.GPIO.output(self.trig, False)
             print 'Sensor will be starting...'
             time.sleep(1)
@@ -63,7 +64,8 @@ class SensorDistance(Sensor):
         except Exception:
             self.GPIO.cleanup()
             print 'GPIO Exception'
-            print traceback.print_exc
+            print traceback.print_exc()
+            #print traceback.print_tb()
             GPIO.cleanup()
             return None
         
