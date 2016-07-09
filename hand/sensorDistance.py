@@ -15,7 +15,7 @@
 import time
 import RPi.GPIO as GPIO
 
-import event
+from event import Event
 from sensor import Sensor
 
 #TODO: REMOVE TO CONFIGURE
@@ -23,7 +23,7 @@ from sensor import Sensor
 SPEED = 17150
 
 class Sensor(Sensor):
-    def __init__(self, _args):
+    def __init__(self, _id='none', _type='none', _args={}):
         '''
         Dict example
         "args": { 
@@ -35,6 +35,8 @@ class Sensor(Sensor):
         # Set board to BCM mode
         GPIO.setmode(GPIO.BCM)
 
+        self.id = _id
+        self.type = _type
         self.trig = int(_args['TRIG'])
         self.echo = int(_args['ECHO'])
 
@@ -79,10 +81,16 @@ class Sensor(Sensor):
             return None
 
         print 'Distance: %s cm.' % (distance - 0.5)
-        event = Event('', )
+        flag = True
+        if distance > self.args['LIMIT']:
+            flag = False
+
+        event = Event(self.id, self.type, flag, int(time.time()))
+
+        return event.buildMessage()
 
 if __name__ == '__main__':
     dict_example = {"ECHO": 24, "TRIG": 23, "LIMIT": 20}
-    sensor = Sensor(dict_example)
-    sensor.detect()
+    sensor = Sensor('dist', '001', dict_example)
+    print sensor.detect()
 
