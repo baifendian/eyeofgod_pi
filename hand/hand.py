@@ -25,7 +25,7 @@ def main() :
         clazz   = getattr(module, cname)
 
         # new a sensor
-        sensor  = clazz()
+        sensor  = clazz(id, info["type"], info["args"])
 
         # register a sensor
         scheduler.register(id, sensor)
