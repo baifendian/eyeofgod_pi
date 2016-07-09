@@ -1,8 +1,7 @@
 import uuid
 import time
 class Event :
-
-    def __init__(self, sensor_type,sensor_id, state,timestamp=int(time.time())) :
+    def __init__(self, sensor_type, sensor_id, state,timestamp=int(time.time())) :
         self.sensor_type  = sensor_type
         self.sensor_id    = sensor_id
         self.pi_mark      = self.getMac()
