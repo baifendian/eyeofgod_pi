@@ -61,25 +61,28 @@ class Sensor(Sensor):
             self.GPIO.cleanup()
             print 'GPIO Exception'
             return None
-
+        
+        start_time = 0;
+        end_time = 0;
         while 0 == self.GPIO.input(self.echo):
-            #print 'first input'
             start_time = time.time()
 
         while 1 == self.GPIO.input(self.echo):
-            #print 'second input'
             end_time = time.time()
-
+        if start_time == 0 or end_time == 0:
+            print 'missassignment'
+            return
         distance = round((end_time - start_time) * SPEED, 2)
 
         if distance < 1 or distance > 4000:
-            print 'Out Of Range'
+            print 'Out Of Range, %s' % (distance)
             return None
 
         print 'Distance: %s cm.' % (distance - 0.5)
+        event = Event('', )
 
 if __name__ == '__main__':
-    dict_example = {"ECHO": 23, "TRIG": 24, "LIMIT": 20}
+    dict_example = {"ECHO": 24, "TRIG": 23, "LIMIT": 20}
     sensor = Sensor(dict_example)
     sensor.detect()
 

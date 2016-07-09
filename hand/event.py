@@ -1,5 +1,5 @@
 class Event(object):
-    def __init__(self, sensor_type,sensor_id, pi_mark, timestamp,state) :
+    def __init__(self, sensor_type, sensor_id, pi_mark, timestamp, state) :
         self.sensor_type  = sensor_type
         self.sensor_id    = sensor_id
         self.pi_mark      = pi_mark
