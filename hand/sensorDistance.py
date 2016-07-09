@@ -27,40 +27,47 @@ ECHO = 24
 SPEED = 17150
 
 class Sensor(Sensor):
-    def __init__(self):
+    def __init__(self, judge):
         # Set board to BCM mode
         GPIO.setmode(GPIO.BCM)
         # Set pin as GPIO out
-        GPIO.setup(TRIG,GPIO.OUT)
+        GPIO.setup(TRIG, GPIO.OUT)
         # Set pin as GPIO in
-        GPIO.setup(ECHO,GPIO.IN)
+        GPIO.setup(ECHO, GPIO.IN)
+
+        self.GPIO = GPIO
+        self.judge = judge
 
     def detect(self):
-        GPIO.output(TRIG, False)
-        print 'Sensor will be starting...'
-        time.sleep(1)
+        try:
+            self.GPIO.output(TRIG, False)
+            print 'Sensor will be starting...'
+            time.sleep(1)
 
-        # Testing for sensor
-        GPIO.output(TRIG, True)
-        time.sleep(0.00001)
-        GPIO.output(TRIG, False)
-        print 'Sensor is ready'
+            # Testing for sensor
+            self.GPIO.output(TRIG, True)
+            time.sleep(0.00001)
+            self.GPIO.output(TRIG, False)
+            print 'Sensor is ready'
+        except Exception:
+            self.GPIO.cleanup()
+            return None
 
-        while 0 == GPIO.input(ECHO):
+        while 0 == self.GPIO.input(ECHO):
             start_time = time.time()
 
-        while 1 == GPIO.input(ECHO):
+        while 1 == self.GPIO.input(ECHO):
             end_time = time.time()
 
         distance = round((end_time - start_time) * SPEED, 2)
 
-        if distance < 2 or distance > 400:
+        if distance < 1 or distance > 4000:
             print 'Out Of Range'
-            return NULL
+            return None
 
-        print 'Distance: %s cm.' % (distance-0.5)
-
+        print 'Distance: %s cm.' % (distance - 0.5)
 
 if __name__ == '__main__':
     sensor = Sensor()
+    sensor.detect()
 
