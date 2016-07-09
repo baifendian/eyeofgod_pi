@@ -34,7 +34,7 @@ class Schedule :
                 try :
                     event = sensor.detect()
                     if event :
-                        print id, sensor, "notify ..."
+                        print id, sensor
                         self.notifier.notify(message)
                 except Exception,ex :
                     pass
