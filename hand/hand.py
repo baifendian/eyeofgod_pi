@@ -2,11 +2,14 @@
 #coding:utf-8
 
 
-import config
+import piconfig
 import schedule
 import sensorDistance
 import sensorMotion
-
+import logging
+from logging import config
+import LOGGING
+config.dictConfig(LOGGING.LOGGING)
 
 
 
@@ -16,7 +19,7 @@ def main() :
     scheduler = schedule.Schedule()
 
     # load sensor
-    for (id,info) in config.SENSOR_MAP.items() :
+    for (id,info) in piconfig.SENSOR_MAP.items() :
 
         mname   = info["module"]
         cname   = info["clazz"]
@@ -34,11 +37,11 @@ def main() :
     scheduler.list()
 
     # start scheduler
-    print "[Schedule] start ..."
+    logging.info( "[Schedule] start ...")
 
     scheduler.start()
 
-    print "[Schedule] stop ..."
+    logging.info("[Schedule] stop ...")
 
 
 

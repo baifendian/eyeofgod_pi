@@ -6,7 +6,10 @@ import time
 import event
 import sensor
 import notice
-
+import logging
+from logging import config
+import LOGGING 
+config.dictConfig(LOGGING.LOGGING)
 
 class Schedule :
 
@@ -31,18 +34,15 @@ class Schedule :
     def start(self) :
         while True :
             time.sleep(1)
-            print "----------------------"
             for (id,sensor) in self.sensors.items() :
-                print "-----------"
                 try :
                     evt = sensor.detect()
                     if evt is not None :
-                        print id, sensor, evt
                         message = evt.buildMessage()
                         notice.Notice.notify(message)
                         print message
                 except Exception,ex :
-                    print ex
+                    logging.error(ex)
                     pass
 
 

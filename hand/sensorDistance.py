@@ -15,9 +15,14 @@
 import time
 import traceback
 import RPi.GPIO as GPIO
+import logging
+import LOGGING 
 
+from logging import config
+config.dictConfig(LOGGING.LOGGING)
 from event import Event
 from sensor import Sensor
+from json import *
 
 #TODO: REMOVE TO CONFIGURE
 # Speed
@@ -53,19 +58,16 @@ class SensorDistance(Sensor):
             GPIO.setup(self.echo, GPIO.IN)
 
             self.GPIO.output(self.trig, False)
-            #print 'Sensor will be starting...'
             time.sleep(1)
 
             # Testing for sensor
             self.GPIO.output(self.trig, True)
             time.sleep(0.00001)
             self.GPIO.output(self.trig, False)
-            #print 'Sensor is ready'
         except Exception:
             self.GPIO.cleanup()
-            print 'GPIO Exception'
-            print traceback.print_exc()
-            #print traceback.print_tb()
+            logging.error('GPIO Exception')
+            traceback.print_exc()
             GPIO.cleanup()
             return None
         
@@ -77,20 +79,20 @@ class SensorDistance(Sensor):
         while 1 == self.GPIO.input(self.echo):
             end_time = time.time()
         if start_time == 0 or end_time == 0:
-            print 'missassignment'
+            logging.error('miss assignment')
             GPIO.cleanup()
             return None
 
         distance = round((end_time - start_time) * SPEED, 2)
         if distance < 1 or distance > 4000:
-            print 'Out Of Range, %s' % (distance)
+            logging.error('Out Of Range, %s' % (distance))
             GPIO.cleanup()
             return None
 
-        print 'Distance: %s cm.' % (distance - 0.5)
-        flag = 0
+        logging.error('Distance: %s cm.' % (distance - 0.5))
+        flag = 1
         if distance > self.args['LIMIT']:
-            flag = 1
+            flag = 0
 
         event = Event(self.id, self.type, flag, int(time.time()))
 

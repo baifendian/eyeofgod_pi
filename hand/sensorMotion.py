@@ -15,6 +15,7 @@ class SensorMotion(sensor.Sensor) :
         #GPIO.setmode(GPIO.BCM)
         #GPIO.setup(self.PINN, GPIO.IN)
 
+
     def detect(self) :
         evt = None
         GPIO.setmode(GPIO.BCM)
