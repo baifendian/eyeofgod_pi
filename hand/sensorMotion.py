@@ -21,10 +21,13 @@ class SensorMotion(sensor.Sensor) :
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.PINN, GPIO.IN)
         if GPIO.input(self.PINN) :
-            now = time.time()
-            if now - self.last > 5 :
-                evt = event.Event(self.type, self.id, 1)
-            self.last = now
+            evt = event.Event(self.type, self.id, 0)
+        else :
+            evt = event.Event(self.type, self.id, 1)
+        #    now = time.time()
+        #    if now - self.last > 5 :
+        #        evt = event.Event(self.type, self.id, 1)
+        #    self.last = now
         return evt
 
 

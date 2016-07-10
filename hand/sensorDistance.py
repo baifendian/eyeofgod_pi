@@ -90,11 +90,11 @@ class SensorDistance(Sensor):
             return None
 
         logging.error('Distance: %s cm.' % (distance - 0.5))
-        flag = 1
+        flag = 0
         if distance > self.args['LIMIT']:
-            flag = 0
+            flag = 1
 
-        event = Event(self.id, self.type, flag, int(time.time()))
+        event = Event(self.type, self.id, flag, int(time.time()))
 
         GPIO.cleanup()
         return event

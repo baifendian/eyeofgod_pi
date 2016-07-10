@@ -9,7 +9,7 @@ SERVER_URL  = "http://" + SERVER_HOST + ":" + SERVER_PORT + SERVER_PATH
 
 
 SENSOR_MAP = {
-    "123456" : {
+    "3" : {
         "type"  : 1, 
         "module": "sensorDistance",
         "clazz" : "SensorDistance", 
@@ -19,7 +19,7 @@ SENSOR_MAP = {
             "LIMIT" : 20
         }
     },
-    "234567" : {
+    "4" : {
         "type"  : 2,
         "module": "sensorMotion",
         "clazz" : "SensorMotion",

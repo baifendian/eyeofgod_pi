@@ -19,6 +19,8 @@ class Notice :
 
     @staticmethod
     def notify(message):
+        print message
+        logging.debug(message)
         ms_encode = urllib.urlencode(message)
         req = urllib2.Request(piconfig.SERVER_URL, ms_encode)
         sock = urllib2.urlopen(req)
